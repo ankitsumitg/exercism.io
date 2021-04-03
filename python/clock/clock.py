@@ -1,12 +1,12 @@
 class Clock:
     def __init__(self, hour, minute):
-        self.t = hour * 60 + minute
+        self.t = (hour * 60 + minute) % 1440
 
     def __repr__(self):
-        return str((self.t // 60) % 24).zfill(2) + ':' + str(self.t % 60).zfill(2)
+        return f'{self.t // 60:02d}:{self.t % 60 :02d}'
 
     def __eq__(self, other):
-        return (self.t // 60) % 24 == (other.t // 60) % 24 and self.t % 60 == other.t % 60
+        return self.t == other.t
 
     def __add__(self, minutes):
         return Clock(0, self.t + minutes)
