@@ -1,5 +1,7 @@
+ROW_FORMAT = '{:<30} | {:>2} | {:>2} | {:>2} | {:>2} | {:>2}'
+
+
 def tally(rows):
-    table = ["Team                           | MP |  W |  D |  L |  P"]
     d = {}
     for i in rows:
         name1, name2, play = i.split(';')
@@ -24,10 +26,6 @@ def tally(rows):
             d[name2][-1] += 3
     lst = [[k] + v for k, v in d.items()]
     lst.sort(key=lambda x: (-x[-1], x[0]))
-    for k in lst:
-        s = k[0].ljust(31) + '|'
-        for i in range(1, 5):
-            s += str(k[i]).rjust(3).ljust(4) + '|'
-        s += str(k[-1]).rjust(3)
-        table.append(s)
-    return table
+    # noinspection PyTypeChecker
+    lst.insert(0, ["Team", "MP", "W", "D", "L", "P"])
+    return [ROW_FORMAT.format(*i) for i in lst]
