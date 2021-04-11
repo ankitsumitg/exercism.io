@@ -3,6 +3,12 @@ pub struct Clock{
     minutes:i32
 }
 
+impl Display for Clock {
+    fn fmt(&self, f: &mut Formatter) -> Result{
+        write!(f,"{:02}:{:02}",self.minutes/60,self.minutes%60)
+    }
+}
+
 use std::fmt::{Display,Formatter,Result};
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
@@ -15,10 +21,3 @@ impl Clock {
         Self::new(0, minutes + self.minutes)
     }
 }
-
-impl Display for Clock {
-    fn fmt(&self, f: &mut Formatter) -> Result{
-        write!(f,"{:02}:{:02}",self.minutes/60,self.minutes%60)
-    }
-}
-
