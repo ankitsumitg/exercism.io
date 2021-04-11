@@ -1,3 +1,5 @@
+use std::fmt::{Display,Formatter,Result};
+
 #[derive(Debug,Eq,PartialEq)]
 pub struct Clock{
     minutes:i32
@@ -9,7 +11,6 @@ impl Display for Clock {
     }
 }
 
-use std::fmt::{Display,Formatter,Result};
 impl Clock {
     pub fn new(hours: i32, minutes: i32) -> Self {
         Self {
