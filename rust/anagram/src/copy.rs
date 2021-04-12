@@ -12,4 +12,11 @@ pub fn anagrams_for<'a>(word: &str, possible_anagrams: &'a [&str]) -> HashSet<&'
     .cloned()
     .filter(|&can| is_anagram(word, can))
     .collect::<HashSet<&'a str>>()
+    /*let mut anagrams: HashSet<&'a str> = HashSet::new();
+    for possible_anagram  in possible_anagrams{
+        if is_anagram(word, possible_anagram){
+            anagrams.insert(possible_anagram);
+        }
+    }
+    anagrams*/
 }
