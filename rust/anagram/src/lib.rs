@@ -1,15 +1,22 @@
 use std::collections::HashSet;
-fn is_anagram(word1: &str, word2: &str) -> bool {
-    let mut w1:Vec<char> = word1.to_lowercase().chars().collect();
-    let mut w2:Vec<char> = word2.to_lowercase().chars().collect();
-    w1.sort();
-    w2.sort();
-    w1.len() == w2.len() && word1.to_lowercase() != word2.to_lowercase() && w1.eq(&w2)
+fn checksum_ignore_order(w: &str) -> u32{
+    let mut check = 0;
+    for i in w.chars(){
+        check ^= i as u32 + 1;
+    }
+    check
 }
 pub fn anagrams_for<'a>(word: &str, possible_anagrams: &'a [&str]) -> HashSet<&'a str> {
+    let word_lower = word.to_lowercase();
+    let check = checksum_ignore_order(&word_lower);
     possible_anagrams
     .iter()
-    .cloned()
-    .filter(|&can| is_anagram(word, can))
-    .collect::<HashSet<&'a str>>()
+    .filter(|candidate| {
+        let candidate_lower = candidate.to_lowercase();
+            candidate_lower.len() == word_lower.len()
+                && candidate_lower != word_lower
+                && checksum_ignore_order(&candidate_lower) == check
+    })
+    .copied()
+    .collect()
 }
