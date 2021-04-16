@@ -3,7 +3,7 @@ pub fn is_valid(code: &str) -> bool {
     let mut digs:Vec<i32> = Vec::new();
     for c in code.replace(" ","").chars(){
         if c.is_digit(10){
-            digs.push(c.to_digit(10).unwrap() as i32);
+            digs.push(c.to_digit(10).unwrap() as i32)
         }
         else{
             return false
